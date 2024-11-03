@@ -55,9 +55,24 @@ export default function Component() {
     }
   };
 
-  // Updated function to create a comma-separated string instead of vCard
-  const generateTextData = (data) => {
-    return `${data.name}, ${data.organization}, ${data.phone}, ${data.email}`;
+  const colorCombos = [
+    { bg: '#ffffff', fg: '#000000' },
+    { bg: '#D3D3D3', fg: '#003366' },
+    { bg: '#FFFDD0', fg: '#DC143C' },
+    { bg: '#7FDBFF', fg: '#001f3f' },
+    { bg: '#FFFFE0', fg: '#36454F' },
+    { bg: '#F5F5DC', fg: '#800000' },
+    { bg: '#ADD8E6', fg: '#4B0082' },   // Light Blue with Indigo
+    { bg: '#FFE4E1', fg: '#0d7edb' },   // Misty Rose with Steel Blue
+  ];
+  
+
+  const handleColorComboClick = (bgColor, fgColor) => {
+    setQrCodeOptions((prevOptions) => ({
+      ...prevOptions,
+      bgColor,
+      fgColor,
+    }));
   };
 
   return (
@@ -76,7 +91,7 @@ export default function Component() {
           >
             <option value="link">Link</option>
             <option value="text">Text</option>
-            <option value="vcard">vCard</option>
+            <option value="vcard">Business Card</option>
           </select>
 
           {qrType === 'link' || qrType === 'text' ? (
@@ -139,16 +154,6 @@ export default function Component() {
                 }))}
                 className="w-full mb-2"
               />
-              <label className="mb-1">Logo Shape:</label>
-              <input
-                type="range"
-                min="0"
-                max="1"
-                step="1"
-                value={qrCodeOptions.logoShape}
-                onChange={(e) => setQrCodeOptions((prev) => ({ ...prev, logoShape: +e.target.value }))}
-                className="w-full mb-2"
-              />
               <label className="mb-1">Error Correction Level:</label>
               <select
                 value={qrCodeOptions.level}
@@ -162,6 +167,23 @@ export default function Component() {
               </select>
             </div>
           </div>
+
+          {/* Recommended Color Combos Section */}
+          <div className="mt-8">
+            <h2 className="text-lg font-bold mb-4">Recommended Color Combinations</h2>
+            <div className="flex flex-wrap gap-2"> {/* Changed to flex for close packing */}
+              {colorCombos.map((combo, index) => (
+                <div
+                  key={index}
+                  className="w-10 h-10 rounded-full cursor-pointer" // Add cursor pointer
+                  style={{
+                    background: `linear-gradient(45deg, ${combo.bg} 50%, ${combo.fg} 50%)`, // Gradient background
+                  }}
+                  onClick={() => handleColorComboClick(combo.bg, combo.fg)} // Add click handler
+                />
+              ))}
+            </div>
+          </div>
         </div>
 
         <div className="w-full md:w-1/2 flex justify-center items-center">
@@ -169,22 +191,18 @@ export default function Component() {
             {inputData && (
               <div className="flex flex-col items-center">
                 <QRCodeCanvas
-                    ref={canvasRef}
-                    value={qrType === 'vcard' ? inputData : inputData} // Ensure inputData is correctly formatted
-                    size={qrCodeOptions.size}
-                    bgColor={qrCodeOptions.bgColor}
-                    fgColor={qrCodeOptions.fgColor}
-                    level={qrCodeOptions.level}
-                    includeMargin={false}
-                    imageSettings={{
-                        ...qrCodeOptions.imageSettings,
-                        height: qrCodeOptions.logoShape === 1 ? qrCodeOptions.imageSettings.height : qrCodeOptions.imageSettings.width,
-                        width: qrCodeOptions.logoShape === 1 ? qrCodeOptions.imageSettings.height : qrCodeOptions.imageSettings.width,
-                    }}
-                    />
+                  ref={canvasRef}
+                  value={qrType === 'vcard' ? inputData : inputData} // Use VCard input for vcard type
+                  bgColor={qrCodeOptions.bgColor}
+                  fgColor={qrCodeOptions.fgColor}
+                  size={qrCodeOptions.size}
+                  level={qrCodeOptions.level}
+                  imageSettings={qrCodeOptions.imageSettings}
+                  renderAs="canvas"
+                />
                 <button
                   onClick={downloadQRCode}
-                  className="mt-4 px-4 py-2 bg-blue-500 text-white font-bold rounded-md hover:bg-blue-600 transition-colors"
+                  className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
                 >
                   Download QR Code
                 </button>

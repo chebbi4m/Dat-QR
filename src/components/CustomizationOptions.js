@@ -9,6 +9,20 @@ export default function CustomizationOptions({ qrCodeOptions, setQrCodeOptions }
     setQrCodeOptions((prevOptions) => ({ ...prevOptions, [option]: value }));
   };
 
+  // Recommended color combinations
+  const colorCombinations = [
+    { bg: '#000000', fg: '#FFFFFF' }, // Classic Black & White
+    { bg: '#003366', fg: '#D3D3D3' }, // Deep Blue & Light Gray
+    { bg: '#004d00', fg: '#b3ffcc' }, // Dark Green & Pale Mint
+    { bg: '#DC143C', fg: '#FFFDD0' }, // Crimson & Soft Cream
+    { bg: '#001f3f', fg: '#7FDBFF' }, // Navy & Light Aqua
+    { bg: '#5D3FD3', fg: '#E6E6FA' }, // Dark Purple & Lavender
+    { bg: '#36454F', fg: '#FFFFE0' }, // Charcoal & Light Yellow
+    { bg: '#800000', fg: '#F5F5DC' }, // Maroon & Beige
+    { bg: '#008080', fg: '#FF7F50' }, // Teal & Coral
+    { bg: '#A52A2A', fg: '#FFB6C1' }, // Dark Red & Light Pink
+  ];
+
   return (
     <div className="space-y-4">
       <h3 className="text-xl font-bold mb-2 text-gray-800">Customization Options</h3>
@@ -31,6 +45,25 @@ export default function CustomizationOptions({ qrCodeOptions, setQrCodeOptions }
           onChange={(e) => handleOptionChange('fgColor', e.target.value)}
           className="w-full h-10 rounded-md"
         />
+      </div>
+
+      {/* Display recommended color combinations */}
+      <div>
+        <h4 className="mb-2 font-medium text-gray-700">Recommended Color Combinations:</h4>
+        <div className="grid grid-cols-2 gap-4">
+          {colorCombinations.map((combo, index) => (
+            <div key={index} className="flex items-center justify-center">
+              <div
+                style={{
+                  width: '50px',
+                  height: '50px',
+                  borderRadius: '50%',
+                  background: `linear-gradient(to bottom right, ${combo.bg} 50%, ${combo.fg} 50%)`,
+                }}
+              />
+            </div>
+          ))}
+        </div>
       </div>
 
       <div>

@@ -34,7 +34,7 @@ export default function VCardForm({ setInputData }) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <h3 className="text-xl font-bold mb-2">vCard Details</h3>
+      <h3 className="text-xl font-bold mb-2">Business Card Details</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <input name="firstName" placeholder="First Name" onChange={handleChange} className="w-full p-2 border border-gray-300 rounded" />
         <input name="lastName" placeholder="Last Name" onChange={handleChange} className="w-full p-2 border border-gray-300 rounded" />
@@ -51,7 +51,7 @@ export default function VCardForm({ setInputData }) {
         <input name="website" placeholder="Website" onChange={handleChange} className="w-full p-2 border border-gray-300 rounded" />
       </div>
       <button type="submit" className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-300">
-        Generate vCard QR Code
+        Generate Business Card QR Code
       </button>
     </form>
   );
