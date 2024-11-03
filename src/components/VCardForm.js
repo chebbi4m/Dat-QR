@@ -25,7 +25,7 @@ export default function VCardForm({ setInputData }) {
     e.preventDefault();
 
     // Create a URL using the input data, replacing empty values with "N/A"
-    const userDataUrl = `http://localhost:3000/${encodeURIComponent(vCardData.firstName || 'N/A')}/${encodeURIComponent(vCardData.lastName || 'N/A')}/${encodeURIComponent(vCardData.mobile || 'N/A')}/${encodeURIComponent(vCardData.phone || 'N/A')}/${encodeURIComponent(vCardData.email || 'N/A')}/${encodeURIComponent(vCardData.company || 'N/A')}/${encodeURIComponent(vCardData.job || 'N/A')}/${encodeURIComponent(vCardData.street || 'N/A')}/${encodeURIComponent(vCardData.city || 'N/A')}/${encodeURIComponent(vCardData.state || 'N/A')}/${encodeURIComponent(vCardData.zip || 'N/A')}/${encodeURIComponent(vCardData.country || 'N/A')}/${encodeURIComponent(vCardData.website || 'N/A')}`;
+    const userDataUrl = `https://dat-qr.onrender.com/${encodeURIComponent(vCardData.firstName || 'N/A')}/${encodeURIComponent(vCardData.lastName || 'N/A')}/${encodeURIComponent(vCardData.mobile || 'N/A')}/${encodeURIComponent(vCardData.phone || 'N/A')}/${encodeURIComponent(vCardData.email || 'N/A')}/${encodeURIComponent(vCardData.company || 'N/A')}/${encodeURIComponent(vCardData.job || 'N/A')}/${encodeURIComponent(vCardData.street || 'N/A')}/${encodeURIComponent(vCardData.city || 'N/A')}/${encodeURIComponent(vCardData.state || 'N/A')}/${encodeURIComponent(vCardData.zip || 'N/A')}/${encodeURIComponent(vCardData.country || 'N/A')}/${encodeURIComponent(vCardData.website || 'N/A')}`;
     
     console.log(userDataUrl);
     // Pass the URL to the parent component
